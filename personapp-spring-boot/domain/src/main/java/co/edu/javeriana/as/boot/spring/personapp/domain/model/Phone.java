@@ -4,10 +4,10 @@ import lombok.Data;
 
 
 @Data
-public class Telefono {
+public class Phone {
 
-	private String num;
-	private String oper;
-	private Persona duenio;
+	private String number;
+	private String provider;
+	private Person owner;
 	
 }
