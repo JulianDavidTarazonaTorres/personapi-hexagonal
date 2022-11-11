@@ -2,49 +2,40 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package co.edu.javeriana.as.boot.spring.personapp.rest.adapter;
+package co.edu.javeriana.as.boot.spring.personapp.domain.logic.impl;
 
-import co.edu.javeriana.as.boot.spring.personapp.domain.model.Study;
-import java.util.List;
-
-import co.edu.javeriana.as.boot.spring.personapp.domain.model.Person;
-import co.edu.javeriana.as.boot.spring.personapp.domain.model.Profession;
 import co.edu.javeriana.as.boot.spring.personapp.domain.model.Phone;
-import co.edu.javeriana.as.boot.spring.personapp.domain.port.in.PersonUseCase;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import co.edu.javeriana.as.boot.spring.personapp.domain.port.in.PhoneUseCase;
+import co.edu.javeriana.as.boot.spring.personapp.domain.port.out.maria.PhonePortOutMaria;
+import co.edu.javeriana.as.boot.spring.personapp.domain.port.out.mongo.PersonPortOutMongo;
 
 /**
  *
  * @author aasanchez
  */
-
-// este utiliza a los mappers
-// el controlador utiliza a esta clase
 @Service
-public class PersonaAppAdapter implements PersonUseCase{
-    
-    @Autowired
-    private PersonUseCase personUseCase;
+public class PhoneLogicImpl implements PhoneUseCase{
 
     @Override
-    public String create(Person person, Integer flag) {
-        return personUseCase.create(person, flag);
-    }
-
-    @Override
-    public String edit(Integer id, Person person, Integer flag) {
+    public String create(Phone phone, Integer flag) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Boolean remove(Integer id, Integer flag) {
+    public String edit(String number, Phone phone, Integer flag) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Person findById(Integer id, Integer flag) {
+    public Boolean remove(String number, Integer flag) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Phone findById(String number, Integer flag) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -54,10 +45,10 @@ public class PersonaAppAdapter implements PersonUseCase{
     }
 
     @Override
-    public List<Person> findAll(Integer flag) {
+    public List<Phone> findAll(Integer flag) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     
-    
+       
 }

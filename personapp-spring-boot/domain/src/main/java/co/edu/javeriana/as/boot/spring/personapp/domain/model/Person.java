@@ -13,12 +13,14 @@ import lombok.Data;
  * @author aasanchez
  */
 @Data
-public class Persona {
-    private int cc;
-    private String nombre;
-    private String apellido;
-    private String genero;
-    private int edad;
-    private List<Telefono> telefonos;
-    private List<Estudios> estudios;
+public class Person {
+    
+    private Integer id;
+    private String name;
+    private String lastName;
+    private String gender;
+    private Integer age;
+    
+    private List<Phone> phones;
+    private List<Study> studies;
 }

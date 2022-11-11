@@ -4,6 +4,8 @@
  */
 package co.edu.javeriana.as.boot.spring.personapp.maria.repository;
 
+import co.edu.javeriana.as.boot.spring.personapp.maria.entity.EstudiosEntity;
+import co.edu.javeriana.as.boot.spring.personapp.maria.entity.EstudiosPK;
 import co.edu.javeriana.as.boot.spring.personapp.maria.entity.PersonaEntity;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,7 +18,7 @@ import org.springframework.stereotype.Repository;
  */
 // solo cambiar los <>
 @Repository
-public interface PersonaRepository extends JpaRepository<PersonaEntity, Integer>{
+public interface EstudiosRepository extends JpaRepository<EstudiosEntity, EstudiosPK>{
     
     
     
