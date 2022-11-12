@@ -27,14 +27,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
 /**
  *
  * @author aasanchez
  */
 
-@CrossOrigin(origins = "http://localhost:8081")
+
 @RestController
-@RequestMapping("/v1")
+
+@RequestMapping("Person")
+
 public class PersonaControllerImpl  implements PersonaController{
     
     @Autowired
@@ -67,6 +70,13 @@ public class PersonaControllerImpl  implements PersonaController{
         
         List<Person> personas = personapp.findAll(appDb);
 	return personaRestMapper.fromListPersonaToListPersonaResponse(personas);
+    }
+    
+   @GetMapping("/hola2")
+    public String hola2() {
+ 
+        return "formulario";
+ 
     }
 
   /*  @Override
