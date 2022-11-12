@@ -19,16 +19,22 @@ import java.util.ArrayList;
 public class PersonaRestMapper {
 
 	public List<PersonaResponse> fromListPersonaToListPersonaResponse(List<Person> personas) {
-		 List<PersonaResponse> persons = new ArrayList<PersonaResponse>();
-        for (Person persona : personas) {
-            persons.add(fromPersonaToPersonaResponse(persona));
-        }
-        return persons;
-	}
+            List<PersonaResponse> persons = new ArrayList<PersonaResponse>();
+            for (Person persona : personas) {
+                persons.add(fromPersonaToPersonaResponse(persona));
+            }
+            return persons;
+            }
 
 	public Person fromPersonaPostResquestToPersona(PersonaPostRequest personaPostRequest) {
-		// TODO Auto-generated method stub
-		return null;
+		Person person = new Person();
+                person.setId(personaPostRequest.getId());
+                person.setName(personaPostRequest.getName());
+                person.setLastName(personaPostRequest.getLastName());
+                person.setAge(personaPostRequest.getAge());
+                person.setGender(personaPostRequest.getGender());
+                
+		return person;
 	}
         
         public PersonaResponse fromPersonaToPersonaResponse(Person persona) {
