@@ -6,7 +6,7 @@ package co.edu.javeriana.as.boot.spring.personapp.rest.mapper;
 
 import java.util.List;
 
-import co.edu.javeriana.as.boot.spring.personapp.domain.model.Persona;
+import co.edu.javeriana.as.boot.spring.personapp.domain.model.Person;
 import co.edu.javeriana.as.boot.spring.personapp.rest.request.PersonaPostRequest;
 import co.edu.javeriana.as.boot.spring.personapp.rest.response.PersonaPostResponse;
 import co.edu.javeriana.as.boot.spring.personapp.rest.response.PersonaResponse;
@@ -17,12 +17,12 @@ import co.edu.javeriana.as.boot.spring.personapp.rest.response.PersonaResponse;
  */
 public class PersonaRestMapper {
 
-	public List<PersonaResponse> fromListPersonaToListPersonaResponse(List<Persona> personas) {
+	public List<PersonaResponse> fromListPersonaToListPersonaResponse(List<Person> personas) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Persona fromPersonaPostResquestToPersona(PersonaPostRequest personaPostRequest) {
+	public Person fromPersonaPostResquestToPersona(PersonaPostRequest personaPostRequest) {
 		// TODO Auto-generated method stub
 		return null;
 	}

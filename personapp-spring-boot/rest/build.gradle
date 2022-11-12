@@ -6,8 +6,10 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
     implementation project(':domain')
-    //implementacion db
+    implementation project(':maria')
+    
 }
 
 

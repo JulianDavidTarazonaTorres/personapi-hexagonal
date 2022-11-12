@@ -4,40 +4,71 @@
  */
 package co.edu.javeriana.as.boot.spring.personapp.maria.adapter;
 
-import co.edu.javeriana.as.boot.spring.personapp.domain.model.Persona;
-import co.edu.javeriana.as.boot.spring.personapp.domain.port.out.PersonaPortOut;
+import co.edu.javeriana.as.boot.spring.personapp.domain.model.Person;
+
+import co.edu.javeriana.as.boot.spring.personapp.domain.port.out.maria.PersonPortOutMaria;
+import co.edu.javeriana.as.boot.spring.personapp.maria.entity.PersonaEntity;
+import co.edu.javeriana.as.boot.spring.personapp.maria.mapper.PersonaMapper;
+import co.edu.javeriana.as.boot.spring.personapp.maria.repository.PersonaRepository;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
  * @author aasanchez
  */
-public class PersonaPersistenceAdapter implements PersonaPortOut{
+public class PersonaPersistenceAdapter implements PersonPortOutMaria{
 
-    //implementa los métodos de salida del modelo
+    @Autowired
+    private PersonaRepository personaRepository;
+    
+    @Autowired
+    private PersonaMapper personaMapper;
+    
     @Override
-    public List<Persona> findAll() {
-        return null;
+    public String create(Person person) {
+        
+        PersonaEntity persona = personaMapper.toPersonaEntityFromPersona(person);
+        
+        if(personaRepository.save(persona)== null)
+        {
+            return "no se creo";
+        }
+        else
+        {
+            return "se creo";
+        }
+        
+        
+        // en mongo el PK es id
+        // crear mongo repository
+        // cambiar mapper a POJOS
     }
 
     @Override
-    public void create(Persona persona) {
-        System.out.println("PersonaPersistenceAdapter.create()");
-    }
-
-    @Override
-    public void edit(Persona persona) {
+    public String edit(Integer id, Person person) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void remove(String id) {
+    public Boolean remove(Integer id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Persona find(String id) {
+    public Person findById(Integer id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    @Override
+    public int count() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Person> findAll() {
+       return personaMapper.toListPersonFromListPersonaEntity(personaRepository.findAll()) ;
+    }
+
     
 }
