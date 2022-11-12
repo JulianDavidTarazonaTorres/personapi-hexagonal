@@ -11,6 +11,7 @@ import co.edu.javeriana.as.boot.spring.personapp.domain.model.Person;
 
 import co.edu.javeriana.as.boot.spring.personapp.domain.port.in.PersonUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 
@@ -21,7 +22,7 @@ import org.springframework.stereotype.Service;
 
 // este utiliza a los mappers
 // el controlador utiliza a esta clase
-@Service
+@Component
 public class PersonaAppAdapter implements PersonUseCase{
     
     @Autowired

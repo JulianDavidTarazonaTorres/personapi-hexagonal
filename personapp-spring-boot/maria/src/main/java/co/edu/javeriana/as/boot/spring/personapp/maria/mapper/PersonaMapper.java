@@ -23,7 +23,10 @@ public class PersonaMapper {
         PersonaEntity pe = new PersonaEntity();
         pe.setCc(person.getId());
         pe.setApellido(person.getLastName());
-        
+        pe.setEdad(person.getAge());
+        pe.setGenero(person.getGender());
+        //pe.setEstudiosList(person.getStudies());
+        //pe.setTelefonoList(person.getPhones());
         return pe;
     }
 
