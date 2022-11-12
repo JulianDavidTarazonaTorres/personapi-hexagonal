@@ -50,10 +50,19 @@ public class PersonLogicImpl implements PersonUseCase{
                 {
                    return mongo;
                 }
-                else
+                if(!mongo.equals("se creo") && maria.equals("se creo"))
                 {
                     // logica para mirar cual se creo (en que base de datos)
-                    return  "falta";
+                    return  maria;
+                }
+                if(mongo.equals("se creo") && !maria.equals("se creo"))
+                {
+                    // logica para mirar cual se creo (en que base de datos)
+                    return  mongo;
+                }
+                else
+                {
+                    return "no se creo";
                 }
         }
         
@@ -63,27 +72,187 @@ public class PersonLogicImpl implements PersonUseCase{
 
     @Override
     public String edit(Integer id, Person person, Integer flag) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        switch (flag) {
+            case 0:
+                // 0 --> Mongo
+                return personPortOutMongo.edit(id, person);
+                
+                
+            case 1:
+                // 1 --> Maria
+                return personPortOutMaria.edit(id, person);
+                
+            default:
+                // logica para retornar solo una persona
+                String mongo = personPortOutMongo.edit(id, person);
+                String maria = personPortOutMaria.edit(id, person);
+                if(mongo.equals(maria) && mongo.equals("se creo"))
+                {
+                   return mongo;
+                }
+                if(!mongo.equals("se creo") && maria.equals("se creo"))
+                {
+                    // logica para mirar cual se creo (en que base de datos)
+                    return  maria;
+                }
+                if(mongo.equals("se creo") && !maria.equals("se creo"))
+                {
+                    // logica para mirar cual se creo (en que base de datos)
+                    return  mongo;
+                }
+                else
+                {
+                    return "no se creo";
+                }
+        }
     }
 
     @Override
     public Boolean remove(Integer id, Integer flag) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        switch (flag) {
+            case 0:
+                // 0 --> Mongo
+                return personPortOutMongo.remove(id);
+                
+                
+            case 1:
+                // 1 --> Maria
+                return personPortOutMaria.remove(id);
+                
+            default:
+                // logica para retornar solo una persona
+                boolean mongo = personPortOutMongo.remove(id);
+                boolean maria = personPortOutMaria.remove(id);
+                if(mongo && maria)
+                {
+                   return mongo;
+                }
+                if(!mongo && maria)
+                {
+                    // logica para mirar cual se creo (en que base de datos)
+                    return  maria;
+                }
+                if(mongo && !maria)
+                {
+                    // logica para mirar cual se creo (en que base de datos)
+                    return  mongo;
+                }
+                else
+                {
+                    return false;
+                }
+        }
     }
 
     @Override
     public Person findById(Integer id, Integer flag) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        switch (flag) {
+            case 0:
+                // 0 --> Mongo
+                return personPortOutMongo.findById(id);
+                
+                
+            case 1:
+                // 1 --> Maria
+                return personPortOutMaria.findById(id);
+                
+            default:
+                // logica para retornar solo una persona
+                Person mongo = personPortOutMongo.findById(id);
+                Person maria = personPortOutMaria.findById(id);
+                if(mongo!= null && maria!= null)
+                {
+                   return mongo;
+                }
+                if(mongo== null && maria!= null)
+                {
+                    // logica para mirar cual se creo (en que base de datos)
+                    return  maria;
+                }
+                if(mongo!= null && maria== null)
+                {
+                    // logica para mirar cual se creo (en que base de datos)
+                    return  mongo;
+                }
+                else
+                {
+                    return null;
+                }
+        }
     }
 
     @Override
     public int count(Integer flag) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        switch (flag) {
+            case 0:
+                // 0 --> Mongo
+                return personPortOutMongo.count();
+                
+                
+            case 1:
+                // 1 --> Maria
+                return personPortOutMaria.count();
+                
+            default:
+                // logica para retornar solo una persona
+                int mongo = personPortOutMongo.count();
+                int maria = personPortOutMaria.count();
+                if(mongo!= -1 && maria!=-1)
+                {
+                   return mongo;
+                }
+                if(mongo==-1 && maria!= -1)
+                {
+                    // logica para mirar cual se creo (en que base de datos)
+                    return  maria;
+                }
+                if(mongo!= -1 && maria== -1)
+                {
+                    // logica para mirar cual se creo (en que base de datos)
+                    return  mongo;
+                }
+                else
+                {
+                    return -1;
+                }
+        }
     }
 
     @Override
     public List<Person> findAll(Integer flag) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        switch (flag) {
+            case 0:
+                // 0 --> Mongo
+                return personPortOutMongo.findAll();
+                
+                
+            case 1:
+                // 1 --> Maria
+                return personPortOutMaria.findAll();
+                
+            default:
+                // logica para retornar solo una persona
+                List<Person> mongo = personPortOutMongo.findAll();
+                List<Person> maria = personPortOutMaria.findAll();
+                if(mongo!= null && maria!= null)
+                {
+                   return mongo;
+                }
+                if(mongo== null && maria!= null)
+                {
+                    // logica para mirar cual se creo (en que base de datos)
+                    return  maria;
+                }
+                if(mongo!= null && maria== null)
+                {
+                    // logica para mirar cual se creo (en que base de datos)
+                    return  mongo;
+                }
+                else
+                {
+                    return null;
+                }
+        }
     }
    
     
