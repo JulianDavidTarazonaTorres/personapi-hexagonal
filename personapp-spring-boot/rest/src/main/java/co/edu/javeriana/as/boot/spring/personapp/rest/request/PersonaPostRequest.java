@@ -12,5 +12,10 @@ import lombok.Data;
  */
 @Data
 public class PersonaPostRequest {
+    private Integer id;
+    private String name;
+    private String lastName;
+    private String gender;
+    private Integer age;
     
 }

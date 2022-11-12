@@ -71,13 +71,7 @@ public class PersonaControllerImpl  implements PersonaController{
         List<Person> personas = personapp.findAll(appDb);
 	return personaRestMapper.fromListPersonaToListPersonaResponse(personas);
     }
-    
-   @GetMapping("/hola2")
-    public String hola2() {
- 
-        return "formulario";
- 
-    }
+   
 
   /*  @Override
     @PostMapping

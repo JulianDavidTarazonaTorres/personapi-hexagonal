@@ -37,8 +37,7 @@ public class PersonaRestMapper {
                 personResponse.setName(persona.getName());
                 personResponse.setLastName(persona.getLastName());
                 personResponse.setAge(persona.getAge());
-                personResponse.setGender(persona.getGender());
-                
+                personResponse.setGender(persona.getGender());      
                 
 		return personResponse;
 	}
