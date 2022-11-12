@@ -14,6 +14,7 @@ import co.edu.javeriana.as.boot.spring.personapp.rest.response.PersonaResponse;
  *
  * @author aasanchez
  */
+
 public interface PersonaController {
 	
 

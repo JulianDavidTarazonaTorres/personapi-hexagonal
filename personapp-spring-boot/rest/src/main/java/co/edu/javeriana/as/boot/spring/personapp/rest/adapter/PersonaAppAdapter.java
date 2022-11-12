@@ -4,12 +4,11 @@
  */
 package co.edu.javeriana.as.boot.spring.personapp.rest.adapter;
 
-import co.edu.javeriana.as.boot.spring.personapp.domain.model.Study;
+
 import java.util.List;
 
 import co.edu.javeriana.as.boot.spring.personapp.domain.model.Person;
-import co.edu.javeriana.as.boot.spring.personapp.domain.model.Profession;
-import co.edu.javeriana.as.boot.spring.personapp.domain.model.Phone;
+
 import co.edu.javeriana.as.boot.spring.personapp.domain.port.in.PersonUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

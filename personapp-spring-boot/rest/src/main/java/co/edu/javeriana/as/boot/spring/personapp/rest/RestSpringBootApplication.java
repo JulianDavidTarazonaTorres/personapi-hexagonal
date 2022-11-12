@@ -4,7 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication(scanBasePackages={
-"co.edu.javeriana.as.boot.spring.personapp.domain.port.in.PersonaApp"})
+"co.edu.javeriana.as.boot.spring.personapp.domain.port.in.PersonUseCase"})
+
 public class RestSpringBootApplication {
 
     public static void main(String[] args) {

@@ -19,14 +19,17 @@ import co.edu.javeriana.as.boot.spring.personapp.rest.response.PersonaPostRespon
 import co.edu.javeriana.as.boot.spring.personapp.rest.response.PersonaResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  *
  * @author aasanchez
  */
 @RestController
+@RequestMapping("Person")
 public class PersonaControllerImpl  implements PersonaController{
     
     @Autowired
@@ -44,6 +47,13 @@ public class PersonaControllerImpl  implements PersonaController{
         
         List<Person> personas = personapp.findAll(appDb);
 	return personaRestMapper.fromListPersonaToListPersonaResponse(personas);
+    }
+    
+   @GetMapping("/hola2")
+    public String hola2() {
+ 
+        return "formulario";
+ 
     }
 
   /*  @Override
