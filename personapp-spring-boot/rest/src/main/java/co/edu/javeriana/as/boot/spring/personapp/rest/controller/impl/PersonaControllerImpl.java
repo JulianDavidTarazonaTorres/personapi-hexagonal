@@ -22,9 +22,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
@@ -73,19 +77,32 @@ public class PersonaControllerImpl  implements PersonaController{
     }
    
 
-  /*  @Override
-    @PostMapping
-    public PersonaPostResponse actualizar(PersonaPostRequest personaPostRequest) {
-	Person p = personaRestMapper.fromPersonaPostResquestToPersona(personaPostRequest);
-	String salida = personapp.edit(appDb, p, appDb)
-		
-	return personaRestMapper.fromAStringToPersonaPostResponse(salida);
+    @Override
+    @PutMapping("/actualizarPersona")
+    public String actualizar(PersonaPostRequest personaPostRequest) {
+        Person persona = personapp.findById(personaPostRequest.getId(),appDb);
+         
+        return personapp.edit(persona.getId(), persona, appDb);
     }
-    */
 
     @Override
-    public PersonaPostResponse actualizar(PersonaPostRequest personaPostRequest) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    @GetMapping("/darPersona")
+    public PersonaResponse buscarPorId(@RequestParam("id") Integer id) {
+        Person p = personapp.findById(id, appDb);
+        return personaRestMapper.fromPersonaToPersonaResponse(p);
+    }
+
+    @Override
+    @DeleteMapping("/eliminarPersona")
+    public boolean eliminar(@RequestParam("id") Integer id) {
+        return personapp.remove(id, appDb);
+    }
+
+    @Override
+    @PostMapping("/crearPersona")
+    public String crear(@RequestBody PersonaPostRequest personaPostRequest) {
+        Person p = personaRestMapper.fromPersonaPostRequestToPersona(personaPostRequest);
+        return personapp.create(p, appDb);
     }
 
     
