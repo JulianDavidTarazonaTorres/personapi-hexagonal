@@ -19,7 +19,9 @@ public interface PersonaController {
 	
 
 	public List<PersonaResponse> buscar();
-	
-	public PersonaPostResponse actualizar(PersonaPostRequest personaPostRequest);
-    
+        public PersonaResponse buscarPorId();
+        public String crear(PersonaPostRequest personaPostRequest);
+	public String actualizar(PersonaPostRequest personaPostRequest);
+        public String eliminar(Integer id);
+        public Integer contar();
 }
