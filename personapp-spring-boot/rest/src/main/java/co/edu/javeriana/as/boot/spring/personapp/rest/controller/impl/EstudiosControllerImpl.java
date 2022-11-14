@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.javeriana.as.boot.spring.personapp.domain.model.Person;
+import co.edu.javeriana.as.boot.spring.personapp.domain.model.Study;
 import co.edu.javeriana.as.boot.spring.personapp.domain.port.in.PersonUseCase;
 import co.edu.javeriana.as.boot.spring.personapp.rest.adapter.PersonaAppAdapter;
 
@@ -22,9 +23,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
@@ -36,15 +41,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @RestController
 
-@RequestMapping("Person")
+@RequestMapping("Study")
 
-public class PersonaControllerImpl  implements PersonaController{
+public class EstudiosControllerImpl  implements EstudiosController{
     
     @Autowired
-    public PersonaAppAdapter personapp;
+    public EstudiosAppAdapter Estudiosapp;
     
     @Autowired
-    public PersonaRestMapper personaRestMapper;
+    public EstudiosRestMapper EstudiosRestMapper;
     
     @Value("${app.db}")
     private int appDb;
@@ -65,27 +70,40 @@ public class PersonaControllerImpl  implements PersonaController{
     }
     
     @Override
-    @GetMapping("/darPersonas")
-    public List<PersonaResponse> buscar() {
+    @GetMapping("/darEstudios")
+    public List<EstudiosResponse> buscar() {
         
-        List<Person> personas = personapp.findAll(appDb);
-	return personaRestMapper.fromListPersonaToListPersonaResponse(personas);
+        List<Study> personas = Estudiosapp.findAll(appDb);
+	return EstudiosRestMapper.fromListEstudiosToListEstudiosResponse(personas);
     }
    
 
-  /*  @Override
-    @PostMapping
-    public PersonaPostResponse actualizar(PersonaPostRequest personaPostRequest) {
-	Person p = personaRestMapper.fromPersonaPostResquestToPersona(personaPostRequest);
-	String salida = personapp.edit(appDb, p, appDb)
-		
-	return personaRestMapper.fromAStringToPersonaPostResponse(salida);
+    @Override
+    @PutMapping("/actualizarEstudios")
+    public String actualizar(EstudiosPostRequest personaPostRequest) {
+        Study persona = Estudiosapp.findById(personaPostRequest.getIdProf(),personaPostRequest.getCcPer(),appDb);
+         
+        return Estudiosapp.edit(persona.getPerson().getId(),persona.getPofession().getId(), persona, appDb);
     }
-    */
 
     @Override
-    public PersonaPostResponse actualizar(PersonaPostRequest personaPostRequest) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    @GetMapping("/darEstudio")
+    public TelefonoResponse buscarPorId(@RequestParam("idCcPer") Integer idCcPer,@RequestParam("idProf") Integer idProf) {
+        Study p = Estudiosapp.findById(idProf,idCcPer, appDb);
+        return EstudiosRestMapper.fromTelefonoToTelefonoResponse(p);
+    }
+
+    @Override
+    @DeleteMapping("/eliminarEstudio")
+    public boolean eliminar(@RequestParam("idCcPer") Integer idCcPer,@RequestParam("idProf") Integer idProf) {
+        return Estudiosapp.remove(idProf,idCcPer, appDb);
+    }
+
+    @Override
+    @PostMapping("/crearEstudio")
+    public String crear(@RequestBody TelefonoPostRequest personaPostRequest) {
+        Study p = EstudiosRestMapper.fromTelefonoPostRequestToTelefono(personaPostRequest);
+        return Estudiosapp.create(p, appDb);
     }
 
     
