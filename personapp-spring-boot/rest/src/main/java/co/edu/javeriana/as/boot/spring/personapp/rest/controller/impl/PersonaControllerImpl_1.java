@@ -42,7 +42,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @RequestMapping("Person")
 
-public class PersonaControllerImpl  implements PersonaController{
+public class PersonaControllerImpl_1  implements PersonaController{
     
     @Autowired
     public PersonaAppAdapter personapp;
@@ -101,7 +101,7 @@ public class PersonaControllerImpl  implements PersonaController{
     @Override
     @PostMapping("/crearPersona")
     public String crear(@RequestBody PersonaPostRequest personaPostRequest) {
-        Person p = personaRestMapper.fromPersonaPostRequestToPersona(personaPostRequest);
+        Person p = personaRestMapper.fromPersonaPostResquestToPersona(personaPostRequest);
         return personapp.create(p, appDb);
     }
 

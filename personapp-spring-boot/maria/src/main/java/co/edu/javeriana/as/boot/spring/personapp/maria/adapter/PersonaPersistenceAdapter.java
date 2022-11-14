@@ -11,6 +11,8 @@ import co.edu.javeriana.as.boot.spring.personapp.maria.entity.PersonaEntity;
 import co.edu.javeriana.as.boot.spring.personapp.maria.mapper.PersonaMapper;
 import co.edu.javeriana.as.boot.spring.personapp.maria.repository.PersonaRepository;
 import java.util.List;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -47,22 +49,41 @@ public class PersonaPersistenceAdapter implements PersonPortOutMaria{
 
     @Override
     public String edit(Integer id, Person person) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        PersonaEntity persona = personaMapper.toPersonaEntityFromPersona(person);
+
+        PersonaEntity result = personaRepository.findById(id).get();
+        if(result != null){
+            result.setCc(persona.getCc());
+            result.setNombre(persona.getNombre());
+            result.setApellido(persona.getApellido());
+            result.setEdad(persona.getEdad());
+            result.setGenero(persona.getGenero());
+            result.setEstudiosList(persona.getEstudiosList());
+            result.setTelefonoList(persona.getTelefonoList());
+
+            return "se creo";
+        }
+        else{
+            return "no se creo";
+        }
+        
+        
     }
 
     @Override
     public Boolean remove(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        personaRepository.deleteById(id);
+        return true;
     }
 
     @Override
     public Person findById(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return personaMapper.toPersonFromPersonaEntity(personaRepository.findById(id).get());
     }
 
     @Override
     public int count() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       return (int) personaRepository.count();
     }
 
     @Override

@@ -8,7 +8,7 @@ import co.edu.javeriana.as.boot.spring.personapp.domain.model.Person;
 import co.edu.javeriana.as.boot.spring.personapp.maria.entity.PersonaEntity;
 import java.util.ArrayList;
 import java.util.List;
-import javax.crypto.AEADBadTagException;
+
 import org.springframework.stereotype.Component;
 
 /**

@@ -29,7 +29,7 @@ public class EstudioRestMapper {
             return estudiosResponse;
             }
 
-	public Study fromEstudioPostResquestToEstudio(EstudioPostRequest estudioPostRequest) {
+	public Study fromEstudioPostRequestToEstudio(EstudioPostRequest estudioPostRequest) {
 		Study study = new Study();
                 
                 study.setUniverity(estudioPostRequest.getUniverity());

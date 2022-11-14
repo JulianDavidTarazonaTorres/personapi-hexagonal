@@ -12,12 +12,17 @@ import co.edu.javeriana.as.boot.spring.personapp.domain.model.Person;
 import co.edu.javeriana.as.boot.spring.personapp.domain.model.Study;
 import co.edu.javeriana.as.boot.spring.personapp.domain.port.in.PersonUseCase;
 import co.edu.javeriana.as.boot.spring.personapp.rest.adapter.PersonaAppAdapter;
+import co.edu.javeriana.as.boot.spring.personapp.rest.adapter.EstudioAppAdapter;
 
 import co.edu.javeriana.as.boot.spring.personapp.rest.controller.PersonaController;
+import co.edu.javeriana.as.boot.spring.personapp.rest.controller.EstudioController;
 import co.edu.javeriana.as.boot.spring.personapp.rest.mapper.PersonaRestMapper;
+import co.edu.javeriana.as.boot.spring.personapp.rest.mapper.EstudioRestMapper;
 import co.edu.javeriana.as.boot.spring.personapp.rest.request.PersonaPostRequest;
+import co.edu.javeriana.as.boot.spring.personapp.rest.request.EstudioPostRequest;
 import co.edu.javeriana.as.boot.spring.personapp.rest.response.PersonaPostResponse;
 import co.edu.javeriana.as.boot.spring.personapp.rest.response.PersonaResponse;
+import co.edu.javeriana.as.boot.spring.personapp.rest.response.EstudioResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -43,13 +48,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @RequestMapping("Study")
 
-public class EstudiosControllerImpl  implements EstudiosController{
+public class EstudiosControllerImpl  implements EstudioController{
     
     @Autowired
-    public EstudiosAppAdapter Estudiosapp;
+    public EstudioAppAdapter Estudiosapp;
     
     @Autowired
-    public EstudiosRestMapper EstudiosRestMapper;
+    public EstudioRestMapper EstudiosRestMapper;
     
     @Value("${app.db}")
     private int appDb;
@@ -71,40 +76,62 @@ public class EstudiosControllerImpl  implements EstudiosController{
     
     @Override
     @GetMapping("/darEstudios")
-    public List<EstudiosResponse> buscar() {
+    public List<EstudioResponse> buscar() {
         
         List<Study> personas = Estudiosapp.findAll(appDb);
-	return EstudiosRestMapper.fromListEstudiosToListEstudiosResponse(personas);
+	return EstudiosRestMapper.fromListEstudioToListEstudioResponse(personas);
     }
    
 
     @Override
     @PutMapping("/actualizarEstudios")
-    public String actualizar(EstudiosPostRequest personaPostRequest) {
-        Study persona = Estudiosapp.findById(personaPostRequest.getIdProf(),personaPostRequest.getCcPer(),appDb);
+    public String actualizar(EstudioPostRequest estudioPostRequest) {
+        Study persona = Estudiosapp.findById(estudioPostRequest.getCcPer(),estudioPostRequest.getIdProf(),appDb);
          
-        return Estudiosapp.edit(persona.getPerson().getId(),persona.getPofession().getId(), persona, appDb);
+        return Estudiosapp.edit(persona.getPerson(),persona.getPofession(), persona, appDb);
     }
 
     @Override
     @GetMapping("/darEstudio")
-    public TelefonoResponse buscarPorId(@RequestParam("idCcPer") Integer idCcPer,@RequestParam("idProf") Integer idProf) {
-        Study p = Estudiosapp.findById(idProf,idCcPer, appDb);
-        return EstudiosRestMapper.fromTelefonoToTelefonoResponse(p);
+    public EstudioResponse buscarPorId(@RequestParam("idCcPer") Integer idCcPer,@RequestParam("idProf") Integer idProf) {
+        List<Study> personas = Estudiosapp.findAll(appDb);
+        Study estudio = null;
+        for (Study p : personas) {
+            if(p.getPerson().getId() == idCcPer && p.getPofession().getId() == idProf)
+            {
+                estudio = p;
+            }
+        }
+        Study p = Estudiosapp.findById(estudio.getPerson(),estudio.getPofession(), appDb);
+        return EstudiosRestMapper.fromEstudioToEstudioResponse(p);
     }
 
     @Override
     @DeleteMapping("/eliminarEstudio")
     public boolean eliminar(@RequestParam("idCcPer") Integer idCcPer,@RequestParam("idProf") Integer idProf) {
-        return Estudiosapp.remove(idProf,idCcPer, appDb);
+        List<Study> personas = Estudiosapp.findAll(appDb);
+        Study estudio = null;
+        for (Study p : personas) {
+            if(p.getPerson().getId() == idCcPer && p.getPofession().getId() == idProf)
+            {
+                estudio = p;
+            }
+        }
+        return Estudiosapp.remove(estudio.getPerson(),estudio.getPofession(), appDb);
     }
 
     @Override
     @PostMapping("/crearEstudio")
-    public String crear(@RequestBody TelefonoPostRequest personaPostRequest) {
-        Study p = EstudiosRestMapper.fromTelefonoPostRequestToTelefono(personaPostRequest);
+    public String crear(@RequestBody EstudioPostRequest personaPostRequest) {
+        Study p = EstudiosRestMapper.fromEstudioPostRequestToEstudio(personaPostRequest);
         return Estudiosapp.create(p, appDb);
     }
+
+	@Override
+	public Integer contar() {
+		List<Study> personas = Estudiosapp.findAll(appDb);
+		return personas.size();
+	}
 
     
 }

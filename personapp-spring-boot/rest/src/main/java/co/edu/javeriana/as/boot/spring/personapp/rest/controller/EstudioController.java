@@ -23,10 +23,10 @@ public interface EstudioController {
 	
 
 	public List<EstudioResponse> buscar();
-        public EstudioResponse buscarPorId(Integer id);
+        public EstudioResponse buscarPorId(Integer id, Integer id2);
         public String crear(EstudioPostRequest estudioRequest);
 	public String actualizar(EstudioPostRequest estudioRequest);
-        public String eliminar(Integer id);
+        public boolean eliminar(Integer id, Integer id2);
         public Integer contar();
     
 }

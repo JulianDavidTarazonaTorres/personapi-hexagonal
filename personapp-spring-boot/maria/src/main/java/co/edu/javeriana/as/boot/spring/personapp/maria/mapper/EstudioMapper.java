@@ -4,14 +4,14 @@
  */
 package co.edu.javeriana.as.boot.spring.personapp.maria.mapper;
 
-import co.edu.javeriana.as.boot.spring.personapp.domain.model.Person;
+
 import co.edu.javeriana.as.boot.spring.personapp.domain.model.Study;
 import co.edu.javeriana.as.boot.spring.personapp.maria.entity.EstudiosEntity;
-import co.edu.javeriana.as.boot.spring.personapp.maria.entity.PersonaEntity;
+
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
-import javax.crypto.AEADBadTagException;
+
 import org.springframework.stereotype.Component;
 
 /**
@@ -55,7 +55,7 @@ public class EstudioMapper {
     }
 
     // TODO
-    private Study toEstudioFromEstudioEntity(EstudiosEntity estudiosEntity) {
+    public Study toEstudioFromEstudioEntity(EstudiosEntity estudiosEntity) {
         PersonaMapper personaMapper = new PersonaMapper();
         ProfesionMapper profesionMapper = new ProfesionMapper();
         

@@ -34,7 +34,7 @@ public class PersonaAppAdapter implements PersonUseCase{
 
     @Override
     public String edit(Integer id, Person person, Integer flag) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return personUseCase.edit(id,person,flag);
     }
 
     @Override
