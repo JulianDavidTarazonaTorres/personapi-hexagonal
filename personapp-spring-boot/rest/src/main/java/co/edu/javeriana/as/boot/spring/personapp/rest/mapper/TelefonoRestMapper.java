@@ -33,7 +33,7 @@ public class TelefonoRestMapper {
 		Phone telefono = new Phone();
                 telefono.setNumber(telefonoPostRequest.getNumber());
                 telefono.setProvider(telefonoPostRequest.getProvider());
-                //set dueño
+                
 		return telefono;
 	}
         
