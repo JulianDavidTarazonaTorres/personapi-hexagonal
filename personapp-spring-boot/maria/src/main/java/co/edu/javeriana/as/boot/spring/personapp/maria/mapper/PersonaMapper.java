@@ -20,12 +20,15 @@ public class PersonaMapper {
    
     //TODO
     public PersonaEntity toPersonaEntityFromPersona(Person person) {
+        
+        EstudioMapper estudioMapper = new EstudioMapper();
+        
         PersonaEntity pe = new PersonaEntity();
         pe.setCc(person.getId());
         pe.setApellido(person.getLastName());
         pe.setEdad(person.getAge());
         pe.setGenero(person.getGender());
-        //pe.setEstudiosList(person.getStudies());
+        pe.setEstudiosList(estudioMapper.toListEstudioEntityFromListEstudio(person.getStudies()));
         //pe.setTelefonoList(person.getPhones());
         return pe;
     }
@@ -38,12 +41,27 @@ public class PersonaMapper {
         }
         return persons;
     }
+    
+    public List<PersonaEntity> toListPersonaEntityFromListPerson(List<Person> findAll) {
+        List<PersonaEntity> persons = new ArrayList<PersonaEntity>();
+        for (Person persona : findAll) {
+            persons.add(toPersonaEntityFromPersona(persona));
+        }
+        return persons;
+    }
 
     // TODO
-    private Person toPersonFromPersonaEntity(PersonaEntity personaEntity) {
+    public Person toPersonFromPersonaEntity(PersonaEntity personaEntity) {
+        
+        EstudioMapper estudioMapper = new EstudioMapper();
+        
         Person pe = new Person();
         pe.setId(personaEntity.getCc());
-        //pe.setApellido(person.getLastName());
+        pe.setName(personaEntity.getNombre());
+        pe.setLastName(personaEntity.getApellido());
+        pe.setAge(personaEntity.getEdad());
+        pe.setGender(personaEntity.getGenero());
+        pe.setStudies(estudioMapper.toListEstudioFromListEstudioEntity(personaEntity.getEstudiosList()));
         
         return pe;
     }
